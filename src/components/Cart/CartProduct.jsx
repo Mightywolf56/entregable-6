@@ -1,9 +1,33 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteProductCart, updateProductCart } from '../../store/slices/cartSlice'
 
 const CartProduct = ({product}) => {
 
+  const dispatch = useDispatch()
+
   const handleDeleteCartProduct = () => {
-    console.log("delete")
+    dispatch(deleteProductCart(product.id))
+  }
+
+  const handleClickPlus = () => {
+    const newQuantity = product.quantity + 1
+    const data = {
+      quantity: newQuantity
+    }
+      dispatch(updateProductCart(product.id, data))
+  }
+
+  const handleClickLess = () => {
+    const newQuantity = product.quantity - 1
+    if(newQuantity < 0) {
+      dispatch(deleteProductCart(product.id))
+    }else {
+      const data = {
+        quantity: newQuantity
+      }
+      dispatch(updateProductCart(product.id, data))
+    }
   }
 
 
@@ -17,9 +41,9 @@ const CartProduct = ({product}) => {
             <h3>{product.product.title}</h3>
 
             <div>
-              <button>-</button>
+              <button onClick={handleClickLess}>-</button>
               <h3>{product.quantity}</h3>
-              <button>+</button>
+              <button onClick={handleClickPlus}>+</button>
             </div>
           </section>
           <section>

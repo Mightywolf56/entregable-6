@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,7 +9,7 @@ const Login = () => {
   const {register, handleSubmit, reset} = useForm()
 
   const { token, user: {firstName, lastName} } = useSelector(store => store.userInfo)
-    console.log(user)
+
   const dispatch = useDispatch()
 
   const submit = (data) => {
@@ -34,7 +33,7 @@ const Login = () => {
       {
         token ? (
           <section>
-            <i class='bx bxs-user-circle'></i>
+            <i className='bx bxs-user-circle'></i>
             <h3>{firstName} {lastName}</h3>
             <button onClick={handleLogOut}>Log out</button>
 
@@ -45,10 +44,10 @@ const Login = () => {
         <div>
           <h4>Test Data</h4>
                 <div>
-                  <i class='bx bx-envelope'></i>john@gmail.com
+                  <i className='bx bx-envelope'></i>john@gmail.com
                 </div>
               <div>
-                <i class='bx bx-lock-alt'></i>john1234
+                <i className='bx bx-lock-alt'></i>john1234
               </div>
         </div>
 

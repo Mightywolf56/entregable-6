@@ -1,22 +1,38 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import ProductCard from '../components/Home/ProductCard'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { addProductCart } from '../store/slices/cartSlice'
+import { axiosEcommerce } from '../utils/configAxios'
 
 const Product = () => {
-
   const [product, setProduct] = useState()
-  const [quantity, setQuantity] = useState(1)  
+  const [quantity, setQuantity] = useState(1) 
+  const [similarProducts, setSimilarProducts] = useState([])
+  
 
   const {id} = useParams()
 
+  const dispatch = useDispatch()
+
   const handleLess = () => {
     const newQuantity = quantity - 1
-    if(newQuantity > 0) {
+    if(newQuantity > 1) {
       setQuantity(newQuantity)
      }
   }
   
-  const handlePlus = () => setQuantity(quantity + 1)
+  const handlePlus = () => setQuantity
+  (quantity + 1);
+
+  const handleClickAddProduct = () => {
+    const data = {
+     quantity,
+     productId: product.id,
+    }
+
+    dispatch(addProductCart(data))
+}
   
 
   useEffect(() => {
@@ -24,7 +40,30 @@ const Product = () => {
     .get(`/products/${id}`)
     .then((res) => setProduct(res.data))
     .catch((err) => console.log(err))
-  }, [])
+  }, [id])
+
+  useEffect(() => {
+    if(product){
+    axiosEcommerce
+      .get(`/products?categoryId=${product?.categoryId}`)
+      .then((res) => {
+        
+        const newSimilarProducts = res.data.filter(
+          (productByCategory) => productByCategory.id ===
+           product.id
+           )
+          setSimilarProducts(newSimilarProducts)
+      
+      
+      })
+      .catch((err) => console.log(err))
+    }
+  },  [product])
+
+  useEffect(() => {
+    setQuantity(1)
+
+  }, [id])
 
 
   return (
@@ -58,13 +97,25 @@ const Product = () => {
           </div>
         </section>
 
-        <button>
+        <button onClick={handleClickAddProduct}>
           Add to start <i className='bx bx-cart-add'></i>
         </button>
 
         <p>{product?.description}</p>
         
       </section>
+
+      <h2>Discover similar item</h2>
+
+      <section>
+        {
+          similarProducts.map((product) => (
+          <ProductCard 
+          key={product.id} 
+          product={product} />
+
+          ))}
+      </section> 
 
     </main>
   )

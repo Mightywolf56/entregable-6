@@ -1,26 +1,28 @@
+import { useEffect } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import ProtectedUserLogged from './components/App/ProtectedUserLogged'
+import NavBar from './components/Layout/NavBar'
+import Cart from './pages/Cart'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Product from './pages/Product'
 import Purshases from './pages/Purshases'
-import Cart from './pages/Cart'
-import ProtectedUserLogged from './components/App/ProtectedUserLogged'
-import NavBar from './components/Layout/NavBar'
-import { useEffect } from 'react'
 import { getAllCartProducts } from './store/slices/cartSlice'
-import {useDispatch} from 'react-redux'
 
 
 function App() {
 
+  const {token} = useSelector(store => store.userInfo)
+
   const dispatch = useDispatch()
 
-  useEffect (() => {
-    dispatch(getAllCartProducts())
-
-
-  },[])
+  useEffect(() => {
+    if(token){
+      dispatch(getAllCartProducts());
+    }
+  }, [token]);
   
 
   return (

@@ -20,7 +20,7 @@ const cartSlice = createSlice ({
 
 })
 
-const {setProductCartGlobal} = cartSlice.actions;
+export const {setProductCartGlobal} = cartSlice.actions;
 
 export const getAllCartProducts = () => (dispatch) => {
     axiosEcommerce
@@ -39,8 +39,22 @@ export const addProductCart = (data) => (dispatch) => {
 
 export const deleteProductCart = (id) => (dispatch) => {
     axiosEcommerce
-    .delete(`/cart/${id}`)
-    .then((res) => console.log(res.data))
+    .delete(`/cart/${id}`, getConfig())
+    .then((res) => dispatch(getAllCartProducts(res.data)))
+    .catch((err) => console.log(err))
+}
+
+export const updateProductCart = (id, data) => (dispatch) => {
+    axiosEcommerce
+    .put(`/cart/${id}`, data, getConfig())
+    .then((res) => dispatch(getAllCartProducts(res)))
+    .catch((err) => console.log(err))
+}
+
+export const purchaseCart = () => (dispatch) => {
+    axiosEcommerce
+    .post("/purchases",{},getConfig())
+    .then((res) => dispatch(setProductCartGlobal([])))
     .catch((err) => console.log(err))
 }
 

@@ -21,7 +21,7 @@ const Home = () => {
 
         <section>
             {
-                products.map(product => <ProductCard key={product.url} product={product} />)
+                products.map((product) => <ProductCard key={product.url} product={product} />)
             }
         </section>
 

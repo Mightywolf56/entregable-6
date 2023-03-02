@@ -9,10 +9,10 @@ export const axiosEcommerce = axios.create({
   export const getConfig = () => {
     const config = {
       header: {
-        "Authorization": `Bearer ${
-          JSON.parse(localStorage.getItem("userInfo")).token
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userInfo"))?.token
         }`
       }
-    }
+    };
     return config
-  }
+  };
