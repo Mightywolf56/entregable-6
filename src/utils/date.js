@@ -7,3 +7,4 @@ export const formatDateDDMMYYYY = (oldFormat) => {
     }
     return newDate.toLocaleDateString("en-En", options)
 }
+

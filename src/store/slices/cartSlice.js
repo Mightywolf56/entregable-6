@@ -1,10 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit"
+
 import { axiosEcommerce, getConfig } from "../../utils/configAxios";
 
 
 const initialState = {
     products: [],
+    error: false,
 }
+
 
 
 const cartSlice = createSlice ({
@@ -14,19 +17,22 @@ const cartSlice = createSlice ({
     reducers: {
         setProductCartGlobal: (state, action) => {
             return {...state, products: action.payload}
+        },
+        setChangeErrorStatus: (state) => {
+            return {...state, error: !state.error}
         }
-    }
+    },
 
 
 })
 
-export const {setProductCartGlobal} = cartSlice.actions;
+export const { setProductCartGlobal, setChangeErrorStatus } = cartSlice.actions;
 
 export const getAllCartProducts = () => (dispatch) => {
     axiosEcommerce
     .get("/cart", getConfig())
     .then((res) => dispatch(setProductCartGlobal(res.data)))
-    .catch((err) => console-log(err))
+    .catch((err) => console.log(err))
 
 }
 
@@ -34,7 +40,16 @@ export const addProductCart = (data) => (dispatch) => {
     axiosEcommerce
      .post("/cart", data, getConfig())
      .then((res) => dispatch(getAllCartProducts()))
-     .catch((err) => console.log(err))
+     .catch((err) => {
+        console.log(err)
+        if(err.response.data?.error == "Product already added to cart"){
+            dispatch(setChangeErrorStatus())
+            setTimeout(() => {
+                dispatch(setChangeErrorStatus())
+            }, 1000)
+        }
+        
+    })
 }
 
 export const deleteProductCart = (id) => (dispatch) => {

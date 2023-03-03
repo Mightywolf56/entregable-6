@@ -28,8 +28,8 @@ const Cart = () => {
 
 
   return (
-    <main>
-      <section>
+    <main className='cart'>
+      <section >
         {products.map((product) =>( 
         <CartProduct 
         key={product.id} 

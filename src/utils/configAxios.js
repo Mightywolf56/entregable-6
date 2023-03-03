@@ -8,7 +8,7 @@ export const axiosEcommerce = axios.create({
 
   export const getConfig = () => {
     const config = {
-      header: {
+      headers: {
         Authorization: `Bearer ${
           JSON.parse(localStorage.getItem("userInfo"))?.token
         }`

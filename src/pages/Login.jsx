@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, userLogOut } from '../store/slices/userInfo.slice' 
+import "./styles/Login.css"
 
 
 const Login = () => {
@@ -29,41 +30,42 @@ const Login = () => {
 
 
   return (
-    <main>
-      {
-        token ? (
-          <section>
-            <i className='bx bxs-user-circle'></i>
-            <h3>{firstName} {lastName}</h3>
-            <button onClick={handleLogOut}>Log out</button>
+    <main className='login'> 
+      {token ? (
+          <section className='login-logged__container'>
+            <i className='login-logged__icon bx bxs-user-circle'></i>
+            <h3 className='login-logged__name'>
+              {firstName} {lastName}
+              </h3>
+            <button className='login-logged__btn' onClick={handleLogOut}>Log out</button>
 
           </section>
         ) : (
-          <form onSubmit={handleSubmit(submit)} action="">
-        <h3>Welcome! Enter your email and password to continue</h3>
-        <div>
-          <h4>Test Data</h4>
-                <div>
+          <form className='login-form__container' onSubmit={handleSubmit(submit)} action="">
+        <h3 className='login-form__title'>Welcome! Enter your email and password to continue</h3>
+        <div className='login-form__containerTest'>
+          <h4 className='login-form__titleTest'>Test Data</h4>
+                <div className='login-form__emailTest'>
                   <i className='bx bx-envelope'></i>john@gmail.com
                 </div>
-              <div>
+              <div className='login-form__passwordTest'>
                 <i className='bx bx-lock-alt'></i>john1234
               </div>
         </div>
 
-        <div>
-          <label htmlFor="">Email</label>
-          <input type="text" {...register("email")} />
+        <div className='login-form__divInfo'>
+          <label className='login-form__label' htmlFor="">Email</label>
+          <input className='login-form__input' type="text" {...register("email")} />
         </div>
 
-        <div>
-          <label htmlFor="">Password</label>
-          <input type="password"  {...register("password")} />
+        <div className='login-form__divInfo'>
+          <label className='login-form__label' htmlFor="">Password</label>
+          <input className='login-form__input' type="password"  {...register("password")} />
         </div>
 
-        <button>Login</button>
+        <button className='login-form__btn'>Login</button>
 
-        <p>Don't have an account? <span>Sign up</span></p>
+        <p className='login-form__footerText'>Don't have an account? <span>Sign up</span></p>
       </form>
         )
       }

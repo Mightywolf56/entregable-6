@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import PurchaseCard from '../Purchases/PurchaseCard'
-import { getConfig } from '../utils/configAxios'
+import { axiosEcommerce, getConfig } from '../utils/configAxios'
 
-const Purshases = () => {
+const Purchases = () => {
 
-  const [purshases, setPurshases] = useState([])
+  const [purchases, setPurchases] = useState([])
 
   useEffect (() => {
     axiosEcommerce
-    .get("/purshases", getConfig())
-    .then((res) => setPurshases(res.data))
+    .get("/purchases", getConfig())
+    .then((res) => setPurchases(res.data))
     .catch((err) => console.log(err))
 
 
@@ -23,10 +23,10 @@ const Purshases = () => {
         <section>
           <h3>My purchases</h3>
           <section>
-            {purshases.map((purchase) => (
+            {purchases.map((purchase) => (
             <PurchaseCard
             key={purchase.id} 
-            purshase={purchase}/>
+            purchase={purchase}/>
              
              ))}
             
@@ -37,5 +37,5 @@ const Purshases = () => {
   )
 }
 
-export default Purshases
+export default Purchases
 
