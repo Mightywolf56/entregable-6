@@ -10,7 +10,7 @@ const NavBar = () => {
 
   return (
     <nav className='navbar'>
-        <Link className='navbar__name' to="/"><h2>e-commerce</h2></Link>
+        <Link className='navbar__name' to="/"><h2>E-commerce</h2></Link>
         <div className='navbar__container-link'>
             <Link className='navbar__link' to="/login"><i className='bx bx-user'></i></Link>
             <Link className='navbar__link' to="/purchases"><i className='bx bx-box'></i></Link>

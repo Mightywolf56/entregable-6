@@ -1,0 +1,28 @@
+.cart__section {
+    display: grid;
+    justify-content: center;
+}
+
+.cart__container {
+    display:flex;
+    justify-content: center
+
+}
+
+
+
+.cart__btn.container{
+    display: flex;
+    justify-content: center;
+
+}
+.cart__btn {
+    border: none;
+    color: white;
+    background-color: var(--primary);
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 200ms ease;
+}

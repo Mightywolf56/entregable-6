@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import CartProduct from '../components/Cart/CartProduct'
 import { getAllCartProducts, purchaseCart } from '../store/slices/cartSlice'
+import "./styles/Cart.css"
 
 const Cart = () => {
 
@@ -38,12 +39,14 @@ const Cart = () => {
       </section>
       <hr />
 
-      <section>
-        <div>
-          <h3>Total</h3>
-          <h3>$ {totalPriceCart}</h3>
+      <section className='cart__section'>
+        <div className='cart__container'>
+          <h3 className='cart__total'>Total </h3>
+          <h3 className='cart__total-price'> $ {totalPriceCart}</h3>
         </div>
-        <button onClick={handlePurchaseCart}>Checkout</button>
+        <div className='cart__btn.container'>
+        <button className='cart__btn' onClick={handlePurchaseCart}>Checkout</button>
+        </div>
       </section>
     </main>
   )

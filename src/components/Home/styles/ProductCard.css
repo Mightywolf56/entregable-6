@@ -1,7 +1,7 @@
 .productCard {
     border: 1px solid var(--gray);
     border-radius: 10px;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .productCard__header {
@@ -77,7 +77,7 @@
     top: 90px;
     right: 25px;
     color: white;
-    background-color: var(--primary);
+    background-color: var(--gray);
     padding: 5px;
     border-radius: 50%;
     font-size: 30px;
@@ -86,4 +86,10 @@
     aspect-ratio: 1;
     cursor: pointer;
 
+}
+
+.productCard__btn:hover{
+    
+background: rgb(248,85,85);
+background: radial-gradient(circle, rgba(248,85,85,1) 50%, rgba(171,171,171,1) 100%);
 }

@@ -28,7 +28,6 @@ function App() {
 
   return (
     <div className="App">
-      <h3>Ecommerce</h3>
       <NavBar/>
       <Notification/>
       <Routes>

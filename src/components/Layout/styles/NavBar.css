@@ -5,7 +5,8 @@
     padding: 10px, 10px;
     position: sticky;
     top: 0;
-    background-color: white;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(223,223,247,1) 35%, rgba(198,216,216,0.547556815695028) 85%);
     z-index: 3;
 }
 
